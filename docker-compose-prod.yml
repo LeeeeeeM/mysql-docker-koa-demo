@@ -10,7 +10,7 @@ services:
                 ports:
                         - "3000:3000"
                 volumes:
-                        - static:/code/static
+                        - static:/server/static
                 restart: always
         nginx:
                 build:
@@ -19,7 +19,7 @@ services:
                 ports:
                         - "80:80"
                 volumes:
-                        - static:/code/static
+                        - static:/server/static
                 restart: always
         mysql:
                 image: mysql:8

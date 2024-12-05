@@ -1,9 +1,10 @@
 services:
         web:
-                image: node:12-alpine
-                working_dir: /code
+                image: keymetrics/pm2:14-alpine
+                working_dir: /server
                 volumes:
-                        - .:/code
+                        - ./server:/server
+                        - ./static:/server/static
                 ports:
                         - "3000:3000"
                 command: npm start
@@ -20,7 +21,7 @@ services:
         nginx:
                 image: nginx:1.17
                 volumes:
-                        - ./static:/code/static
+                        - ./static:/server/static
                         - ./conf/default.conf:/etc/nginx/conf.d/default.conf
                 ports:
                         - "80:80"
