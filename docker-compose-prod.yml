@@ -1,0 +1,31 @@
+volumes:
+        static:
+        db:
+
+services:
+        web:
+                build:
+                        context: ./
+                        dockerfile: ./compose/node/Dockerfile 
+                ports:
+                        - "3000:3000"
+                volumes:
+                        - static:/code/static
+                restart: always
+        nginx:
+                build:
+                        context: ./
+                        dockerfile: ./compose/nginx/Dockerfile
+                ports:
+                        - "80:80"
+                volumes:
+                        - static:/code/static
+                restart: always
+        mysql:
+                image: mysql:8
+                env_file: .env
+                volumes:
+                        - db:/var/lib/mysql
+                ports:
+                        - "3306:3306"
+                restart: always
